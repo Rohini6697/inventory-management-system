@@ -1,0 +1,117 @@
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #0b0f19, #05070d);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 60px 0;
+}
+
+/* ===== Container ===== */
+.signin-container {
+  background: #101820;
+  width: 450px;
+  border-radius: 20px;
+  padding: 50px 55px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.25);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.signin-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.35);
+}
+
+/* ===== Header ===== */
+.header h1 {
+  font-size: 2.3rem;
+  color: #00eaff;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.header p {
+  font-size: 14px;
+  color: #b0c4de;
+  margin-bottom: 35px;
+}
+
+/* ===== Input Fields ===== */
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  color: #b0c4de;
+  margin-bottom: 8px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 10px;
+  background: #1a2533;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.input-group input:focus {
+  background: #243447;
+  box-shadow: 0 0 8px #00eaff;
+}
+
+/* ===== Button ===== */
+.signin-btn {
+  width: 100%;
+  padding: 14px;
+  background: #00eaff;
+  color: #0c0f14;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.signin-btn:hover {
+  background: #00bcd4;
+  box-shadow: 0 0 15px #00eaff;
+}
+
+/* ===== Footer Text ===== */
+.signup-text {
+  font-size: 14px;
+  color: #b0c4de;
+  margin-top: 25px;
+}
+
+.signup-text a {
+  color: #00eaff;
+  font-weight: 600;
+  margin-left: 5px;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.signup-text a:hover {
+  color: #00bfff;
+  text-shadow: 0 0 8px rgba(0, 191, 255, 0.8);
+}

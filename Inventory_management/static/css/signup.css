@@ -1,0 +1,174 @@
+/* ===== Base Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #0b0f19, #05070d);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 60px 0;
+}
+
+/* ===== Container ===== */
+.signup-container {
+  background: #101820;
+  width: 580px; /* slightly wider for comfort */
+  border-radius: 20px;
+  padding: 50px 60px;
+  box-shadow: 0 0 35px rgba(0, 255, 255, 0.25);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.signup-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 45px rgba(0, 255, 255, 0.35);
+}
+
+/* ===== Header ===== */
+.header h1 {
+  font-size: 2.3rem;
+  color: #00eaff;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.header p {
+  font-size: 14px;
+  color: #b0c4de;
+  margin-bottom: 30px;
+}
+
+/* ===== Input Fields ===== */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #1a2533;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+form input:focus {
+  background: #243447;
+  box-shadow: 0 0 8px #00eaff;
+}
+
+/* ===== Role Boxes in 2x2 Grid ===== */
+/* ===== Role Buttons 2x2 Grid Layout ===== */
+.role-buttons {
+  display: flex;
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+  margin: 30px 0 35px;
+}
+
+/* ===== Role Box Style ===== */
+.role-box {
+  background: rgba(0, 191, 255, 0.1);
+  color: #00bfff;
+  padding: 20px 0;
+  width: 90%;
+  max-width: 200px;
+  text-align: center;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.1);
+}
+
+.role-box:hover {
+  background: rgba(0, 191, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.role-box.selected {
+  background: #00bfff;
+  color: #fff;
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.6);
+  transform: scale(1.08);
+}
+
+/* ===== Submit Button ===== */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: #00eaff;
+  color: #0c0f14;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background: #00bcd4;
+  box-shadow: 0 0 15px #00eaff;
+}
+
+/* ===== Footer ===== */
+.footer-text {
+  font-size: 12px;
+  color: #8fa2b6;
+  margin-top: 25px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Login Redirect Text ===== */
+form p {
+  font-size: 14px;
+  color: #b0c4de;
+  margin-top: 20px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+form p a {
+  color: #00eaff;
+  font-weight: 600;
+  margin-left: 5px;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+form p a:hover {
+  color: #00bfff;
+  text-shadow: 0 0 8px rgba(0, 191, 255, 0.8);
+}
+
+
+/* ===== Responsive (for mobile) ===== */
+@media (max-width: 600px) {
+  .signup-container {
+    width: 90%;
+    padding: 40px 30px;
+  }
+
+  .role-container {
+    grid-template-columns: 1fr; /* stack vertically on small screens */
+  }
+
+  .role-box {
+    max-width: none;
+  }
+}

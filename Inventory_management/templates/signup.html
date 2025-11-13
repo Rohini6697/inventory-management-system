@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veltrix | Signup</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+    <div class="signup-container">
+        <div class="header">
+            <h1>Veltrix</h1>
+            <p>Smart Inventory System for Electronics</p>
+        </div>
+
+        <form method="post" id="signupForm">
+            {% csrf_token %}
+            
+            <div class="input-group">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+
+            <div class="input-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+
+            <div class="input-group">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </div>
+
+            <div class="input-group">
+                {{ form.confirm_password.label_tag }}
+                {{ form.confirm_password }}
+            </div>
+
+            <h3 class="role-title">Select Your Role</h3>
+            <div class="role-buttons">
+                {% for value, label in form.role.field.choices %}
+                    <div class="role-box" data-value="{{ value }}">{{ label }}</div>
+                {% endfor %}
+            </div>
+
+            <input type="hidden" name="role" id="selectedRole">
+            <button type="submit" class="submit-btn">Create Account</button>
+            <p>Already have an account ?<a href="{% url 'signin' %}">signin</a></p>
+        </form>
+    </div>
+
+    <script>
+        const boxes = document.querySelectorAll('.role-box');
+        const hiddenInput = document.getElementById('selectedRole');
+
+        boxes.forEach(box => {
+            box.addEventListener('click', () => {
+                boxes.forEach(b => b.classList.remove('selected'));
+                box.classList.add('selected');
+                hiddenInput.value = box.getAttribute('data-value');
+            });
+        });
+    </script>
+</body>
+</html>

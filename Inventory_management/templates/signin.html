@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veltrix | Sign In</title>
+  <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+</head>
+<body>
+  <div class="signin-container">
+    <div class="header">
+      <h1>Veltrix</h1>
+      <p>Welcome back to your smart inventory system</p>
+    </div>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter your username">
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter your password">
+      </div>
+
+      <button type="submit" class="signin-btn">Sign In</button>
+
+      <p class="signup-text">Don’t have an account? <a href="{% url 'signup' %}">signup</a></p>
+    </form>
+  </div>
+</body>
+</html>
