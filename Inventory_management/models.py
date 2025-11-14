@@ -10,7 +10,7 @@ class Profile(models.Model):
         ('accountant','Accountant')
     )
     role = models.CharField(max_length=10,choices=ROLE_CHOICES,default='staff')
-    profile_pic = models.ImageField(upload_to='profile_pics/',default='default.jpg')
+    profile_pic = models.ImageField(upload_to='profile_pics/',default='profile_pics/default.jpg')
     def __str__(self):
         return f"{self.user.username} {self.role}"
     

@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Profile</title>
+    <link rel="stylesheet" href="{% static 'css/staff/staff_profile.css' %}">
+</head>
+<body>
+
+<div class="profile-container">
+
+    <!-- TOP SECTION -->
+    <div class="profile-header">
+        <div class="profile-img-wrapper">
+            <img src="{{ request.user.profile.profile_pic.url }}" alt="Profile Image" class="profile-img">
+            <a href="#" class="change-photo-btn">Change Photo</a>
+        </div>
+
+        <div class="basic-info">
+            <h2>{{ request.user.username|title }}</h2>
+            <p class="role">{{ request.user.profile.role|title }}</p>
+
+            <table class="info-table">
+                <tr>
+                    <td><strong>Full Name</strong></td>
+                    <td>{{ request.user.first_name }} {{ request.user.last_name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Email</strong></td>
+                    <td>{{ request.user.email }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Phone</strong></td>
+                    <td>{{ request.user.profile.phone }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- WORK DETAILS -->
+    <div class="section-card">
+        <h3>Work Information</h3>
+        <table class="info-table">
+            <tr>
+                <td><strong>Employee ID</strong></td>
+                <td>ST-{{ request.user.id }}</td>
+            </tr>
+            <tr>
+                <td><strong>Joined On</strong></td>
+                <td>{{ request.user.date_joined|date:"d M Y" }}</td>
+            </tr>
+            <tr>
+                <td><strong>Last Login</strong></td>
+                <td>{{ request.user.last_login|date:"d M Y, h:i A" }}</td>
+            </tr>
+            <tr>
+                <td><strong>Status</strong></td>
+                <td class="active">Active</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- PERFORMANCE -->
+    <div class="section-card">
+        <h3>Performance Overview</h3>
+        <div class="stats">
+            <div class="stat-box">
+                <h4>Total Sales</h4>
+                <p>{{ total_sales }}</p>
+            </div>
+            <div class="stat-box">
+                <h4>Sales Today</h4>
+                <p>{{ sales_today }}</p>
+            </div>
+            <div class="stat-box">
+                <h4>Products Updated</h4>
+                <p>{{ updated_products }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="actions">
+        <a href="#" class="btn-update">Update Profile</a>
+        <a href="#" class="btn-password">Change Password</a>
+        <a href="{% url 'staff_dashboard' %}" class="btn-back">Back to Dashboard</a>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,11 +1,62 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Staff Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/staff/staff_dashboard.css' %}">
 </head>
 <body>
-    <h1>staff_dashboard</h1>
+
+    <!-- SIDEBAR (same as your main dashboard) -->
+    <div class="sidebar">
+        <h2>Inventory</h2>
+
+        <a href="{% url 'staff_dashboard' %}" class="active">Dashboard</a>
+        <a href="{% url 'record_sales' %}">Record Sales</a>
+        <a href="{% url 'view_sales' %}">View Sales</a>
+        <a href="{% url 'products' %}">Products</a>
+        <a href="staff_profile.html">Profile</a>
+        <a href="{% url 'signin' %}">Logout</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+        <!-- TOP BAR -->
+        <div class="topbar">
+            <p class="welcome">Hi, {{request.user.username}} 👋</p>
+
+            <!-- PROFILE IMAGE moved to right -->
+            <a href="{% url 'staff_profile' %}" class="profile-link">
+                <img src="{{request.user.profile.profile_pic.url}}" alt="User" class="profile-img">
+            </a>
+        </div>
+
+        <!-- MAIN CARDS -->
+        <h1 class="title">Staff Dashboard</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Products</h3>
+                <p>120</p>
+            </div>
+
+            <div class="card">
+                <h3>Sales Today</h3>
+                <p>₹4,580</p>
+            </div>
+
+            <div class="card">
+                <h3>Pending Orders</h3>
+                <p>8</p>
+            </div>
+
+        </div>
+
+    </div>
+
 </body>
 </html>

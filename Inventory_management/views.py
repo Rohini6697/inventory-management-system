@@ -16,11 +16,11 @@ def signup(request):
 
             profile = profile_form.save(commit=False)
             profile.user = user
+            profile.role = form.cleaned_data['role']   # save the role here
             profile.save()
 
-            role = request.POST.get('role')
-            Profile.objects.create(user = user, role = form.cleaned_data['role'])
             return redirect('signin')
+
     else:
         form = UserForm()
         profile_form = ProfileForm()
@@ -53,11 +53,25 @@ def manager_dashboard(request):
 
 # ==========================================  STAFF   ==========================================
 def staff_dashboard(request):
-    return render(request,'staff_dashboard.html')
+    return render(request,'staff/staff_dashboard.html')
+
+def staff_profile(request):
+    return render(request,'staff/staff_profile.html')
+
+def record_sales(request):
+    return render(request,'staff/record_sales.html')
+
+def view_sales(request):
+    return render(request,'staff/view_sales.html')
+
+def products(request):
+    return render(request,'staff/products.html')
+
+
 
 # ==========================================  ACCOUNTANT   ==========================================
 def accountant_dashboard(request):
-    return render(request,'accountant_dashboard.html')
+    return render(request,'accountant/accountant_dashboard.html')
 
 # ==========================================  ADMIN   ==========================================
 def admin_dashboard(request):

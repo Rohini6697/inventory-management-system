@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Sales</title>
+    <link rel="stylesheet" href="{% static 'css/staff/view_sales.css' %}">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>Inventory</h2>
+
+        <a href="{% url 'staff_dashboard' %}" class="active">Dashboard</a>
+        <a href="{% url 'record_sales' %}">Record Sales</a>
+        <a href="{% url 'view_sales' %}">View Sales</a>
+        <a href="{% url 'products' %}">Products</a>
+        <a href="staff_profile.html">Profile</a>
+        <a href="{% url 'signin' %}">Logout</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+        <!-- TOP BAR -->
+        <div class="topbar">
+            <p class="welcome">Hi, {{request.user.username}} 👋</p>
+
+            <a href="{% url 'staff_profile' %}" class="profile-link">
+                <img src="{{request.user.profile.profile_pic.url}}" alt="User" class="profile-img">
+            </a>
+        </div>
+
+        <h1 class="title">Sales History</h1>
+
+        <!-- SEARCH + FILTERS -->
+        <div class="filters">
+            <input type="text" placeholder="Search by Customer or Invoice…" class="search-box">
+
+            <input type="date" class="date-filter">
+            <input type="date" class="date-filter">
+
+            <button class="filter-btn">Filter</button>
+        </div>
+
+        <!-- SALES TABLE -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Sale ID</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                        <th>Invoice No</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for sale in sales %}
+                    <tr>
+                        <td>{{ sale.date }}</td>
+                        <td>{{ sale.sale_id }}</td>
+                        <td>{{ sale.customer_name }}</td>
+                        <td>{{ sale.product }}</td>
+                        <td>{{ sale.quantity }}</td>
+                        <td>₹{{ sale.unit_price }}</td>
+                        <td><strong>₹{{ sale.total_price }}</strong></td>
+                        <td>{{ sale.invoice_number }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="no-data">No sales found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>

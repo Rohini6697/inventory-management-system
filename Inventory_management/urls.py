@@ -20,6 +20,12 @@ path('manager_dashboard/',views.manager_dashboard,name = 'manager_dashboard'),
 
 # =============================  STAFF  ====================================
 path('staff_dashboard/',views.staff_dashboard,name = 'staff_dashboard'),
+path('staff_profile/',views.staff_profile,name = 'staff_profile'),
+path('record_sales/',views.record_sales,name = 'record_sales'),
+path('view_sales/',views.view_sales,name = 'view_sales'),
+path('products/',views.products,name = 'products'),
+
+
 
 
 
