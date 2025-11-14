@@ -14,6 +14,7 @@ class UserForm(forms.ModelForm):
             'username' : None
         }
 
+
         def clean(self):
             cleaned_data = super().clean()
             password = cleaned_data.get('password')
@@ -25,3 +26,8 @@ class UserForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['role', 'profile_pic']

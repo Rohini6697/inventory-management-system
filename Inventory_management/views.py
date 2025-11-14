@@ -1,6 +1,6 @@
 from .models import Profile
 from django.shortcuts import redirect, render
-from .forms import UserForm
+from .forms import UserForm,ProfileForm
 from django.contrib.auth import authenticate, login as auth_login
 
 
@@ -8,17 +8,23 @@ from django.contrib.auth import authenticate, login as auth_login
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
-        if form.is_valid():
+        profile_form = ProfileForm(request.POST, request.FILES) 
+        if form.is_valid() and profile_form.is_valid():
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
 
             role = request.POST.get('role')
             Profile.objects.create(user = user, role = form.cleaned_data['role'])
             return redirect('signin')
     else:
         form = UserForm()
-    return render(request,'signup.html',{'form':form})
+        profile_form = ProfileForm()
+    return render(request,'signup.html',{'form':form,'profile_form': profile_form   })
 def signin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
