@@ -67,6 +67,10 @@ def view_sales(request):
 def products(request):
     return render(request,'staff/products.html')
 
+def add_products(request):
+    return render(request,'staff/add_products.html')
+
+
 
 
 # ==========================================  ACCOUNTANT   ==========================================

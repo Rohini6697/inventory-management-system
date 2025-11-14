@@ -19,8 +19,8 @@ body {
 
 .sidebar h2 {
     text-align: center;
-    font-size: 22px;
     margin: 0;
+    font-size: 22px;
     padding-bottom: 20px;
     border-bottom: 1px solid #374151;
 }
@@ -31,6 +31,7 @@ body {
     margin: 12px 0;
     color: #d1d5db;
     text-decoration: none;
+    font-size: 15px;
     border-radius: 8px;
     transition: 0.3s;
 }
@@ -38,9 +39,8 @@ body {
 .sidebar a:hover,
 .sidebar .active {
     background: #374151;
-    color: white;
+    color: #fff;
 }
-
 /* MAIN AREA */
 .main {
     margin-left: 230px;

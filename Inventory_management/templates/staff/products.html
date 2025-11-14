@@ -13,11 +13,11 @@
     <div class="sidebar">
         <h2>Inventory</h2>
 
-        <a href="{% url 'staff_dashboard' %}">Dashboard</a>
+        <a href="{% url 'staff_dashboard' %}" class="active">Dashboard</a>
         <a href="{% url 'record_sales' %}">Record Sales</a>
+        <a href="{% url 'add_products' %}">Add Products</a>
         <a href="{% url 'view_sales' %}">View Sales</a>
-        <a href="{% url 'products' %}" class="active">Products</a>
-        <a href="{% url 'staff_profile' %}">Profile</a>
+        <a href="{% url 'products' %}">Products</a>
         <a href="{% url 'signin' %}">Logout</a>
     </div>
 

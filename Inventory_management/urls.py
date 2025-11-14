@@ -24,7 +24,7 @@ path('staff_profile/',views.staff_profile,name = 'staff_profile'),
 path('record_sales/',views.record_sales,name = 'record_sales'),
 path('view_sales/',views.view_sales,name = 'view_sales'),
 path('products/',views.products,name = 'products'),
-
+path('add_products/',views.add_products,name = 'add_products'),
 
 
 

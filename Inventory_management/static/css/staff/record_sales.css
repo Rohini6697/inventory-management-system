@@ -19,6 +19,7 @@ body {
 
 .sidebar h2 {
     text-align: center;
+    margin: 0;
     font-size: 22px;
     padding-bottom: 20px;
     border-bottom: 1px solid #374151;
@@ -40,7 +41,6 @@ body {
     background: #374151;
     color: #fff;
 }
-
 /* ========== MAIN ========== */
 .main {
     margin-left: 230px !important;
