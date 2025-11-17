@@ -25,6 +25,8 @@ path('record_sales/',views.record_sales,name = 'record_sales'),
 path('view_sales/',views.view_sales,name = 'view_sales'),
 path('products/',views.products,name = 'products'),
 path('add_products/',views.add_products,name = 'add_products'),
+path('add_details/',views.add_details,name = 'add_details'),
+path('staff_details/',views.staff_details,name = 'staff_details'),
 
 
 

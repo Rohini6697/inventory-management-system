@@ -26,7 +26,8 @@
 
     <h1>Add New Product</h1>
 
-    <form class="product-form">
+    <form class="product-form" action="" method="POST">
+        {% csrf_token %}
 
         <!-- 1. Product Image -->
         <div class="section-card">
@@ -59,10 +60,10 @@
                     <input type="text" name="brand">
                 </div>
 
-                <div>
+                <!-- <div>
                     <label>Product Code / SKU</label>
                     <input type="text" name="sku">
-                </div>
+                </div> -->
 
                 <div>
                     <label>Model Number</label>

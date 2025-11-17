@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Details</title>
+    <link rel="stylesheet" href="{% static 'css/staff/staff_details.css' %}">
+</head>
+<body>
+
+<h2>Staff Additional Details</h2>
+
+<form action="{% url 'staff_details' %}" method="POST">
+    {% csrf_token %}
+    <!-- Basic Information -->
+    <h3>Personal Information</h3>
+
+    <label>Full Name:</label><br>
+    <input type="text" name="full_name" required><br><br>
+
+    <label>Date of Birth:</label><br>
+    <input type="date" id="dob" name="dob" required><br><br>
+
+    <label>Age (Auto):</label><br>
+    <input type="number" id="age" name="age" readonly><br><br>
+
+    <label>Gender:</label><br>
+    <select name="gender" required>
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+    </select><br><br>
+
+    <!-- Contact -->
+    <h3>Contact Information</h3>
+
+    <label>Phone Number:</label><br>
+    <input type="number" name="phone" required><br><br>
+
+    <label>Address:</label><br>
+    <textarea name="address" rows="3" required></textarea><br><br>
+
+
+    <!-- Work Information -->
+    <h3>Work Details</h3>
+
+    <label>Department:</label><br>
+    <input type="text" name="department" required><br><br>
+
+    <label>Job Title:</label><br>
+    <input type="text" name="job_title" required><br><br>
+
+    <label>Work Start Date:</label><br>
+    <input type="date" id="start_date" name="start_date" required><br><br>
+
+    <label>Years of Experience (Auto):</label><br>
+    <input type="number" id="experience" readonly><br><br>
+
+    <!-- Submit -->
+    <button type="submit">Save Details</button>
+
+</form>
+
+<script>
+    // Auto Age Calculation
+    document.getElementById("dob").addEventListener("change", function () {
+        let dob = new Date(this.value);
+        let today = new Date();
+
+        let age = today.getFullYear() - dob.getFullYear();
+        let monthDiff = today.getMonth() - dob.getMonth();
+
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+
+        document.getElementById("age").value = age;
+    });
+
+    // Auto Experience Calculation
+    document.getElementById("start_date").addEventListener("change", function () {
+        let start = new Date(this.value);
+        let today = new Date();
+
+        let years = today.getFullYear() - start.getFullYear();
+        let monthDiff = today.getMonth() - start.getMonth();
+
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < start.getDate())) {
+            years--;
+        }
+
+        document.getElementById("experience").value = years;
+    });
+</script>
+
+</body>
+</html>
