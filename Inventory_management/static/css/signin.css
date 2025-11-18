@@ -115,3 +115,23 @@ body {
   color: #00bfff;
   text-shadow: 0 0 8px rgba(0, 191, 255, 0.8);
 }
+.credentials-box {
+  background: #243447;
+  border: 1px solid #00eaff;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.credentials-box h3 {
+  color: #00eaff;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.credentials-box p {
+  font-size: 14px;
+  margin: 3px 0;
+}

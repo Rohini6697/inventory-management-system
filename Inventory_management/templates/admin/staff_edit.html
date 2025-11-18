@@ -36,7 +36,7 @@
             <input type="text" name="full_name" value="{{ staff.full_name }}" required>
 
             <label>Date of Birth</label>
-            <input type="date" name="dob" value="{{ staff.dob }}" required>
+            <input type="date" name="dob" value="{{ staff.dob|date:'Y-m-d' }}" required>
 
             <label>Age</label>
             <input type="number" name="age" value="{{ staff.age }}" required>
@@ -61,7 +61,7 @@
             <input type="text" name="job_title" value="{{ staff.job_title }}" required>
 
             <label>Start Date</label>
-            <input type="date" name="start_date" value="{{ staff.start_date }}" required>
+            <input type="date" name="start_date" value="{{ staff.start_date|date:'Y-m-d' }}" required>
 
             <label>Active Status</label>
             <input type="checkbox" name="is_active" {% if staff.is_active %}checked{% endif %}> Active

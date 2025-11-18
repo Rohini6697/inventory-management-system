@@ -6,6 +6,11 @@ from django.contrib.auth import authenticate, login as auth_login
 
 
 # Create your views here.
+from django.contrib.auth import authenticate, login as auth_login
+
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib import messages
+
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -52,6 +57,7 @@ def signin(request):
     return render(request,'signin.html')
 
 
+
 # ==========================================  MANAGER   ==========================================
 def manager_dashboard(request):
     return render(request,'manager/manager_dashboard.html')
@@ -61,7 +67,33 @@ def staff_dashboard(request):
     return render(request,'staff/staff_dashboard.html')
 
 def staff_profile(request):
-    return render(request,'staff/staff_profile.html')
+    profile = get_object_or_404(Profile, user=request.user)
+    staff = getattr(profile, "staff", None)
+
+    if request.method == "POST":
+        full_name = request.POST.get("full_name")
+        phone = request.POST.get("phone")
+        address = request.POST.get("address")
+        gender = request.POST.get("gender")
+
+        # Update Staff Model
+        staff.full_name = full_name
+        staff.phone = phone
+        staff.address = address
+        staff.gender = gender
+        staff.save()
+
+        # Update Profile Picture (optional)
+        if "profile_pic" in request.FILES:
+            profile.profile_pic = request.FILES["profile_pic"]
+            profile.save()
+
+        return redirect("staff_profile")
+
+    return render(request, "staff/staff_profile.html", {
+        "profile": profile,
+        "staff": staff
+    })
 
 def record_sales(request):
     products = Product.objects.all()
@@ -101,7 +133,10 @@ def record_sales(request):
 
 
 def view_sales(request):
-    sales = SalesRecord.objects.all().order_by("-date")
+    user = request.user
+
+    # Filter sales records for this user only
+    sales = SalesRecord.objects.filter(staff=user).order_by("-date")
     return render(request, "staff/view_sales.html", {"sales": sales})
 
 

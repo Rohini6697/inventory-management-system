@@ -1,91 +1,67 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Profile</title>
+    <title>My Profile</title>
     <link rel="stylesheet" href="{% static 'css/staff/staff_profile.css' %}">
 </head>
+
 <body>
 
-<div class="profile-container">
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>Staff</h2>
+    <a href="{% url 'staff_dashboard' %}" >Dashboard</a>
+    <a href="{% url 'products' %}">View Products</a>
+    <a href="{% url 'record_sales' %}">Record Sales</a>
+    <a href="{% url 'view_sales' %}">View Sales</a>
+    <a href="{% url 'staff_profile' %}" class="active">Staff Profile</a>
+    <a href="{% url 'signin' %}">Logout</a>
+</div>
 
-    <!-- TOP SECTION -->
-    <div class="profile-header">
-        <div class="profile-img-wrapper">
-            <img src="{{ request.user.profile.profile_pic.url }}" alt="Profile Image" class="profile-img">
-            <a href="#" class="change-photo-btn">Change Photo</a>
+<!-- MAIN CONTENT -->
+<div class="main">
+
+    <h1 class="title">Update Your Details</h1>
+
+    <div class="profile-container">
+
+        <!-- LEFT: Profile card -->
+        <div class="profile-card">
+            <img src="{{ profile.profile_pic.url }}" class="big-pic">
+            <h2>{{ staff.full_name }}</h2>
+            <p>{{ request.user.email }}</p>
         </div>
 
-        <div class="basic-info">
-            <h2>{{ request.user.username|title }}</h2>
-            <p class="role">{{ request.user.profile.role|title }}</p>
+        <!-- RIGHT: Form -->
+        <div class="form-card">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
 
-            <table class="info-table">
-                <tr>
-                    <td><strong>Full Name</strong></td>
-                    <td>{{ request.user.first_name }} {{ request.user.last_name }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Email</strong></td>
-                    <td>{{ request.user.email }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Phone</strong></td>
-                    <td>{{ request.user.profile.phone }}</td>
-                </tr>
-            </table>
+                <label>Full Name</label>
+                <input type="text" name="full_name" value="{{ staff.full_name }}">
+
+                <label>Phone</label>
+                <input type="text" name="phone" value="{{ staff.phone }}">
+
+                <label>Address</label>
+                <textarea name="address">{{ staff.address }}</textarea>
+
+                <label>Gender</label>
+                <select name="gender">
+                    <option value="Male" {% if staff.gender == "Male" %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if staff.gender == "Female" %}selected{% endif %}>Female</option>
+                    <option value="Other" {% if staff.gender == "Other" %}selected{% endif %}>Other</option>
+                </select>
+
+                <label>Change Profile Picture</label>
+                <input type="file" name="profile_pic">
+
+                <button type="submit" class="btn-primary">Update Profile</button>
+            </form>
         </div>
-    </div>
 
-    <!-- WORK DETAILS -->
-    <div class="section-card">
-        <h3>Work Information</h3>
-        <table class="info-table">
-            <tr>
-                <td><strong>Employee ID</strong></td>
-                <td>ST-{{ request.user.id }}</td>
-            </tr>
-            <tr>
-                <td><strong>Joined On</strong></td>
-                <td>{{ request.user.date_joined|date:"d M Y" }}</td>
-            </tr>
-            <tr>
-                <td><strong>Last Login</strong></td>
-                <td>{{ request.user.last_login|date:"d M Y, h:i A" }}</td>
-            </tr>
-            <tr>
-                <td><strong>Status</strong></td>
-                <td class="active">Active</td>
-            </tr>
-        </table>
-    </div>
-
-    <!-- PERFORMANCE -->
-    <div class="section-card">
-        <h3>Performance Overview</h3>
-        <div class="stats">
-            <div class="stat-box">
-                <h4>Total Sales</h4>
-                <p>{{ total_sales }}</p>
-            </div>
-            <div class="stat-box">
-                <h4>Sales Today</h4>
-                <p>{{ sales_today }}</p>
-            </div>
-            <div class="stat-box">
-                <h4>Products Updated</h4>
-                <p>{{ updated_products }}</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ACTION BUTTONS -->
-    <div class="actions">
-        <a href="#" class="btn-update">Update Profile</a>
-        <a href="#" class="btn-password">Change Password</a>
-        <a href="{% url 'staff_dashboard' %}" class="btn-back">Back to Dashboard</a>
     </div>
 
 </div>

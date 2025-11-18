@@ -12,12 +12,11 @@
 <!-- SIDEBAR -->
 <div class="sidebar">
     <h2>Staff</h2>
-    <a href="{% url 'staff_dashboard' %}" class="active">Dashboard</a>
+    <a href="{% url 'staff_dashboard' %}" >Dashboard</a>
     <a href="{% url 'products' %}">View Products</a>
-    <a href="{% url 'record_sales' %}">Record Sales</a>
+    <a href="{% url 'record_sales' %} " class="active">Record Sales</a>
     <a href="{% url 'view_sales' %}">View Sales</a>
-    <a href="">My Stock Requests</a>
-    <a href="">Request New Product</a>
+    <a href="{% url 'staff_profile' %}">Staff Profile</a>
     <a href="{% url 'signin' %}">Logout</a>
 </div>
 

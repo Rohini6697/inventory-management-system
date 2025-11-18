@@ -17,8 +17,7 @@
     <a href="{% url 'products' %}">View Products</a>
     <a href="{% url 'record_sales' %}">Record Sales</a>
     <a href="{% url 'view_sales' %}">View Sales</a>
-    <a href="">My Stock Requests</a>
-    <a href="">Request New Product</a>
+    <a href="{% url 'staff_profile' %}">Staff Profile</a>
     <a href="{% url 'signin' %}">Logout</a>
 </div>
 
@@ -27,22 +26,11 @@
 
     <header>
         <h1>Staff Dashboard</h1>
+        <div class="welcome">Welcome, {{ request.user.username|capfirst }}</div>
     </header>
 
     <!-- RESPONSIBILITIES -->
-    <div class="cards">
-
-        <div class="card small">
-            <h3>Total Products</h3>
-            <p>{{ product_count }}</p>
-        </div>
-
-        <div class="card small">
-            <h3>My Requests</h3>
-            <p>{{ request_count }}</p>
-        </div>
-
-    </div>
+    
 
 
     
