@@ -1,79 +1,93 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Products</title>
-    <link rel="stylesheet" href="{% static 'css/staff/products.css' %}">
+    <title>View Products</title>
+    <link rel="stylesheet" href="{% static 'css/staff/staff_dashboard.css' %}">
 </head>
+
 <body>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <h2>Inventory</h2>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>Staff</h2>
+    <a href="{% url 'staff_dashboard' %}" class="active">Dashboard</a>
+    <a href="{% url 'products' %}">View Products</a>
+    <a href="{% url 'record_sales' %}">Record Sales</a>
+    <a href="">View Sales</a>
+    <a href="">My Stock Requests</a>
+    <a href="">Request New Product</a>
+    <a href="{% url 'signin' %}">Logout</a>
+</div>
 
-        <a href="{% url 'staff_dashboard' %}" class="active">Dashboard</a>
-        <a href="{% url 'record_sales' %}">Record Sales</a>
-        <a href="{% url 'add_products' %}">Add Products</a>
-        <a href="{% url 'view_sales' %}">View Sales</a>
-        <a href="{% url 'products' %}">Products</a>
-        <a href="{% url 'signin' %}">Logout</a>
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+    <header>
+        <h1>Product List</h1>
+    </header>
+
+    <!-- Search + Filter -->
+    <div class="filters">
+        <form method="GET">
+            <input type="text" name="search" placeholder="Search product name..."
+                   value="{{ search_query }}">
+
+            <select name="category">
+                <option value="">All Categories</option>
+                {% for cat in categories %}
+                <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>
+                    {{ cat }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" class="btn-primary">Apply</button>
+        </form>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="main">
+    <!-- Product Table -->
+    <div class="table-wrap">
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Request Update</th>
+                </tr>
+            </thead>
 
-        <!-- TOP BAR -->
-        <div class="topbar">
-            <p class="welcome">Hi, {{request.user.username}} 👋</p>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category }}</td>
 
-            <a href="{% url 'staff_profile' %}">
-                <img src="{{request.user.profile.profile_pic.url}}" class="profile-img" alt="">
-            </a>
-        </div>
+                    <td class="{% if product.quantity <= 5 %}low{% endif %}">
+                        {{ product.quantity }}
+                    </td>
 
-        <h1 class="title">Search Products</h1>
+                    <td>
+                        <a href=""
+                           class="btn-table edit">Request Stock Update</a>
+                    </td>
+                </tr>
 
-        <!-- SEARCH BAR -->
-        <div class="search-area">
-            <form method="GET">
-                <input type="text" name="q" class="search-box" placeholder="Search by product name or category..." value="{{request.GET.q}}">
-                <button class="search-btn">Search</button>
-            </form>
-        </div>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No products available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
 
-        <!-- PRODUCT RESULTS -->
-        <div class="table-container">
-            {% if products %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Stock</th>
-                        <th>Price (₹)</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {% for item in products %}
-                    <tr>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.category }}</td>
-                        <td>{{ item.stock }}</td>
-                        <td>{{ item.price }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-            {% else %}
-            <p class="no-data">No products found.</p>
-            {% endif %}
-        </div>
-
+        </table>
     </div>
+
+</div>
 
 </body>
 </html>

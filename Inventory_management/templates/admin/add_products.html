@@ -1,0 +1,51 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="{% static 'css/admin/add_products.css' %}">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>Manager</h2>
+        <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+        <a href="{% url 'add_products' %}">Add Product</a>
+        <a href="{% url 'view_products' %}">View Products</a>
+        <a href="{% url 'low_stock' %}">Low Stock Items</a>
+        <a href="{% url 'staff_management' %}">Staff Management</a>
+        <a href="{% url 'signin' %}">Logout</a>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Add New Product</h1>
+        </header>
+
+        <div class="card form-card">
+            <form method="POST" class="product-form">
+                {% csrf_token %}
+                <label for="id_name">Product Name</label>
+                <input id="id_name" type="text" name="name" required>
+
+                <label for="id_category">Category</label>
+                <input id="id_category" type="text" name="category" required>
+
+                <label for="id_price">Price</label>
+                <input id="id_price" type="number" name="price" step="0.01" required>
+
+                <label for="id_quantity">Quantity</label>
+                <input id="id_quantity" type="number" name="quantity" min="0" required>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Add Product</button>
+                    <a href="{% url 'view_products' %}" class="btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

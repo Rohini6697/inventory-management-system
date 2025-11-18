@@ -1,125 +1,58 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Record Sales</title>
     <link rel="stylesheet" href="{% static 'css/staff/record_sales.css' %}">
 </head>
+
 <body>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <h2>Inventory</h2>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>Staff</h2>
+    <a href="{% url 'staff_dashboard' %}" class="active">Dashboard</a>
+    <a href="{% url 'products' %}">View Products</a>
+    <a href="{% url 'record_sales' %}">Record Sales</a>
+    <a href="{% url 'view_sales' %}">View Sales</a>
+    <a href="">My Stock Requests</a>
+    <a href="">Request New Product</a>
+    <a href="{% url 'signin' %}">Logout</a>
+</div>
 
-        <a href="{% url 'staff_dashboard' %}" class="active">Dashboard</a>
-        <a href="{% url 'record_sales' %}">Record Sales</a>
-        <a href="{% url 'add_products' %}">Add Products</a>
-        <a href="{% url 'view_sales' %}">View Sales</a>
-        <a href="{% url 'products' %}">Products</a>
-        <a href="{% url 'signin' %}">Logout</a>
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+    <header><h1>Record Sales</h1></header>
+
+    <div class="form-card">
+        <form method="POST" class="sales-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Product</label>
+                <select name="product_id" required>
+                    {% for p in products %}
+                    <option value="{{ p.id }}">{{ p.name }} (Stock: {{ p.quantity }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Sale Quantity</label>
+                <input type="number" name="quantity" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label>Customer Name</label>
+                <input type="text" name="customer_name" placeholder="Optional">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Submit Sale</button>
+            </div>
+        </form>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="main">
-
-        <!-- TOP BAR -->
-        <div class="topbar">
-            <p class="welcome">Hi, {{ request.user.username }} 👋</p>
-
-            <a href="{% url 'staff_profile' %}">
-                <img src="{{ request.user.profile.profile_pic.url }}" class="profile-img">
-            </a>
-        </div>
-
-        <!-- FORM CONTAINER -->
-        <div class="form-box">
-            <h2 class="form-title">Record Sales</h2>
-
-            <form action="" method="POST">
-                {% csrf_token %}
-
-                <div class="form-grid">
-
-                    <!-- Date -->
-                    <div>
-                        <label for="date">Sale Date</label>
-                        <input type="date" id="date" name="sale_date" required>
-                    </div>
-
-                    <!-- Sale ID (Auto-generated display only) -->
-                    <!-- <div>
-                        <label for="sale_id">Sale ID</label>
-                        <input type="text" id="sale_id" value="SALE-{{ sale_id }}" readonly>
-                    </div> -->
-
-                    <!-- Product -->
-                    <div>
-                        <label for="product">Product</label>
-                        <select id="product" name="product" required>
-                            <option value="">Select product</option>
-                            {% for p in products %}
-                                <option value="{{ p.id }}">{{ p.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- Quantity -->
-                    <div>
-                        <label for="quantity">Quantity</label>
-                        <input type="number" id="quantity" name="quantity" min="1" required>
-                    </div>
-
-                    <!-- Unit Price -->
-                    <div>
-                        <label for="unit_price">Unit Price</label>
-                        <input type="number" id="unit_price" name="unit_price" step="0.01" required>
-                    </div>
-
-                    <!-- Total Price (AUTO) -->
-                    <div>
-                        <label for="total_price">Total Price</label>
-                        <input type="number" id="total_price" name="total_price" readonly>
-                    </div>
-
-                    <!-- Customer Name -->
-                    <div>
-                        <label for="customer_name">Customer Name</label>
-                        <input type="text" id="customer_name" name="customer_name" placeholder="Enter name">
-                    </div>
-
-                    <!-- Invoice Number -->
-                    <!-- <div>
-                        <label for="invoice">Invoice Number</label>
-                        <input type="text" id="invoice" name="invoice_no" placeholder="INV-001">
-                    </div> -->
-
-                    <!-- Submit -->
-                    <button class="submit-btn" type="submit">Save Sale</button>
-
-                </div>
-
-            </form>
-        </div>
-
-    </div>
-
-    <!-- AUTO PRICE SCRIPT -->
-    <script>
-        const qty = document.getElementById("quantity");
-        const price = document.getElementById("unit_price");
-        const total = document.getElementById("total_price");
-
-        function updateTotal() {
-            if (qty.value && price.value) {
-                total.value = (qty.value * price.value).toFixed(2);
-            }
-        }
-
-        qty.oninput = updateTotal;
-        price.oninput = updateTotal;
-    </script>
-
-</body>
-</html>
+</div>

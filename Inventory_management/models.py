@@ -36,6 +36,13 @@ class Staff(models.Model):
         ]
     )
 
+    phone = models.CharField(max_length=15)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.full_name
+
+
     # Contact Information
     phone = models.CharField(max_length=15)
     address = models.TextField()
@@ -55,62 +62,24 @@ class Staff(models.Model):
 class Product(models.Model):
 
     # 1. Product Image
-    image = models.ImageField(upload_to='products/', blank=True, null=True)
-
-    # 2. Product Identification
+    name = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
-    product_name = models.CharField(max_length=200)
-    brand = models.CharField(max_length=100, blank=True, null=True)
-    # sku = models.CharField(max_length=100, unique=True)   # product code / SKU
-    model_number = models.CharField(max_length=100, blank=True, null=True)
-
-    # 3. Description
-    description = models.TextField(blank=True, null=True)
-
-    # 4. Pricing
-    cost_price = models.DecimalField(max_digits=10, decimal_places=2)
-    selling_price = models.DecimalField(max_digits=10, decimal_places=2)
-    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    discounted_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-
-    # 5. Stock Info
-    stock_quantity = models.PositiveIntegerField(default=0)
-    alert_stock = models.PositiveIntegerField(default=0)
-    location = models.CharField(max_length=150, blank=True, null=True)
-
-    # 6. Lifecycle
-    manufacturing_date = models.DateField(blank=True, null=True)
-    purchase_date = models.DateField(blank=True, null=True)
-    warranty_period = models.PositiveIntegerField(blank=True, null=True)   # in months
-    warranty_end = models.DateField(blank=True, null=True)
-
-    # 7. Supplier Info
-    supplier_name = models.CharField(max_length=150, blank=True, null=True)
-    supplier_contact = models.CharField(max_length=50, blank=True, null=True)
-    supplier_address = models.TextField(blank=True, null=True)
-
-    added_on = models.DateTimeField(auto_now_add=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.product_name
+        return self.name
 
 
 
 
 
 class SalesRecord(models.Model):
-    sale_date = models.DateField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    
     quantity = models.PositiveIntegerField()
-    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
-
-    customer_name = models.CharField(max_length=150, blank=True, null=True)
-
-    recorded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
+    staff = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    customer_name = models.CharField(max_length=150, null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Sale - {self.product.name} - {self.sale_date}"
+        return f"{self.product.name} - {self.quantity}"

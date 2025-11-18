@@ -1,119 +1,158 @@
-body {
-    margin: 0;
-    font-family: Poppins, sans-serif;
-    background: #f4f7fb;
-    display: flex;
+/* ---------- Base ---------- */
+:root {
+    --sidebar-bg: #2c3e50;
+    --accent: #3498db;
+    --accent-dark: #2471a3;
+    --muted: #f4f6f9;
+    --danger: #e74c3c;
+    --card-bg: #ffffff;
 }
 
-/* SIDEBAR */
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--muted);
+}
+
+/* ---------- Sidebar ---------- */
 .sidebar {
-    width: 200px;
+    width: 230px;
     height: 100vh;
-    background: #111827;
+    background: var(--sidebar-bg);
     color: white;
-    padding: 25px;
     position: fixed;
-    top: 0;
+    padding: 20px;
     left: 0;
+    top: 0;
 }
 
 .sidebar h2 {
     text-align: center;
-    margin: 0;
-    font-size: 22px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #374151;
+    margin-bottom: 15px;
 }
 
 .sidebar a {
     display: block;
-    padding: 12px;
-    margin: 12px 0;
-    color: #d1d5db;
+    color: #ecf0f1;
+    padding: 12px 10px;
     text-decoration: none;
-    font-size: 15px;
-    border-radius: 8px;
-    transition: 0.3s;
+    margin: 6px 0;
+    border-radius: 6px;
 }
 
-.sidebar a:hover,
-.sidebar .active {
-    background: #374151;
-    color: #fff;
+.sidebar a.active,
+.sidebar a:hover {
+    background: var(--accent);
 }
 
-/* MAIN CONTENT */
-.main {
-    margin-left: 230px;
-    padding: 25px;
-    width: calc(100% - 230px);
+/* ---------- Main Content ---------- */
+.main-content {
+    margin-left: 250px;
+    padding: 22px;
 }
 
-/* TOPBAR */
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ffffff;
-    padding: 15px 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+header h1 {
+    margin: 0;
+    font-size: 26px;
 }
 
-.welcome {
-    font-size: 18px;
-    font-weight: 600;
-    color: #111827;
-}
-
-/* PROFILE IMAGE */
-.profile-img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    cursor: pointer;
-    border: 2px solid #4b5563;
-    transition: 0.3s;
-}
-
-.profile-img:hover {
-    transform: scale(1.05);
-}
-
-/* PAGE TITLE */
-.title {
-    margin-top: 25px;
-    font-size: 28px;
-    font-weight: 600;
-    color: #111827;
-}
-
-/* DASHBOARD CARDS */
+/* ---------- Cards ---------- */
 .cards {
-    margin-top: 20px;
     display: flex;
-    gap: 20px;
+    gap: 18px;
+    margin-top: 16px;
 }
 
 .card {
-    flex: 1;
-    background: white;
-    padding: 22px;
-    border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    background: var(--card-bg);
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    width: 200px;
     text-align: center;
 }
 
 .card h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #2563eb;
+    margin: 0 0 6px 0;
+    font-size: 14px;
 }
 
 .card p {
-    margin-top: 10px;
-    font-size: 26px;
-    font-weight: 700;
-    color: #111827;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+/* ---------- Filters ---------- */
+.filters {
+    margin-top: 20px;
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+}
+
+.filters input,
+.filters select {
+    padding: 10px;
+    border: 1px solid #dce1e4;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--accent-dark);
+}
+
+/* ---------- Table ---------- */
+.table-wrap {
+    margin-top: 20px;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.product-table th {
+    background: var(--sidebar-bg);
+    color: white;
+    padding: 12px;
+}
+
+.product-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.low {
+    color: var(--danger);
+    font-weight: bold;
+}
+
+.btn-table {
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    background: var(--accent);
+    font-size: 13px;
+}
+
+.btn-table:hover {
+    background: var(--accent-dark);
 }

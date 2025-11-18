@@ -1,0 +1,206 @@
+/* ---------- Base ---------- */
+:root {
+    --sidebar-bg: #2c3e50;
+    --accent: #1abc9c;
+    --accent-dark: #16a085;
+    --muted: #f4f6f9;
+    --card-bg: #ffffff;
+    --danger: #e74c3c;
+}
+
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--muted);
+    color: #2b3b46;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    background: var(--sidebar-bg);
+    color: white;
+    position: fixed;
+    padding: 20px;
+    left: 0;
+    top: 0;
+    overflow: auto;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin: 0 0 18px 0;
+    font-size: 22px;
+    letter-spacing: 0.4px;
+}
+
+.sidebar a {
+    display: block;
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 12px 10px;
+    margin: 6px 0;
+    border-radius: 6px;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* ---------- Main Content ---------- */
+.main-content {
+    margin-left: 250px; /* leave room for sidebar */
+    padding: 22px;
+    min-height: 100vh;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* ---------- Cards ---------- */
+.cards {
+    display: flex;
+    gap: 18px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    min-width: 220px;
+}
+
+.card.small { width: 160px; text-align: center; }
+.card h3 { margin: 0 0 6px 0; font-size: 14px; color: #23303a; }
+.card p { margin: 0; font-size: 20px; font-weight: 700; color: var(--accent); }
+
+/* ---------- Form styles ---------- */
+.form-card {
+    margin-top: 22px;
+    max-width: 720px;
+}
+
+.product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-form label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.product-form input,
+.product-form select,
+.product-form textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #e0e6ea;
+    font-size: 14px;
+    width: 100%;
+    background: #fff;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary:hover { background: var(--accent-dark); }
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #cfd8dc;
+    color: #2b3b46;
+    padding: 10px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+/* ---------- Table styles ---------- */
+.table-wrap {
+    margin-top: 20px;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.product-table thead th {
+    background: var(--sidebar-bg);
+    color: white;
+    padding: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.product-table tbody td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eef2f4;
+    font-size: 14px;
+}
+
+.product-table tbody tr:last-child td { border-bottom: 0; }
+
+/* low stock highlight */
+.product-table tbody td.low {
+    color: var(--danger);
+    font-weight: 700;
+}
+
+/* action buttons in table */
+.btn-table {
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    font-size: 13px;
+    margin: 0 4px;
+}
+
+.btn-table.edit { background:#3498db; }
+.btn-table.edit:hover { background:#2980b9; }
+
+.btn-table.delete { background: #e74c3c; }
+.btn-table.delete:hover { background: #c0392b; }
+
+/* responsive */
+@media (max-width: 900px) {
+    .sidebar { width: 200px; }
+    .main-content { margin-left: 220px; padding: 16px; }
+    .cards { gap: 12px; }
+}
+@media (max-width: 640px) {
+    .sidebar { position: relative; width: 100%; height: auto; padding: 12px; }
+    .main-content { margin-left: 0; padding: 12px; }
+    .cards { flex-direction: column; }
+    .card.small { width: 100%; }
+}

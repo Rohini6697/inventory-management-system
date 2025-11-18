@@ -7,56 +7,47 @@
     <title>Staff Dashboard</title>
     <link rel="stylesheet" href="{% static 'css/staff/staff_dashboard.css' %}">
 </head>
+
 <body>
 
-    <!-- SIDEBAR (same as your main dashboard) -->
-    <div class="sidebar">
-        <h2>Inventory</h2>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>Staff</h2>
+    <a href="{% url 'staff_dashboard' %}" class="active">Dashboard</a>
+    <a href="{% url 'products' %}">View Products</a>
+    <a href="{% url 'record_sales' %}">Record Sales</a>
+    <a href="{% url 'view_sales' %}">View Sales</a>
+    <a href="">My Stock Requests</a>
+    <a href="">Request New Product</a>
+    <a href="{% url 'signin' %}">Logout</a>
+</div>
 
-        <a href="{% url 'staff_dashboard' %}" class="active">Dashboard</a>
-        <a href="{% url 'record_sales' %}">Record Sales</a>
-        <a href="{% url 'add_products' %}">Add Products</a>
-        <a href="{% url 'view_sales' %}">View Sales</a>
-        <a href="{% url 'products' %}">Products</a>
-        <a href="{% url 'signin' %}">Logout</a>
-    </div>
+<!-- MAIN CONTENT -->
+<div class="main-content">
 
-    <!-- MAIN CONTENT -->
-    <div class="main">
+    <header>
+        <h1>Staff Dashboard</h1>
+    </header>
 
-        <!-- TOP BAR -->
-        <div class="topbar">
-            <p class="welcome">Hi, {{request.user.username}} 👋</p>
+    <!-- RESPONSIBILITIES -->
+    <div class="cards">
 
-            <!-- PROFILE IMAGE moved to right -->
-            <a href="{% url 'staff_profile' %}" class="profile-link">
-                <img src="{{request.user.profile.profile_pic.url}}" alt="User" class="profile-img">
-            </a>
+        <div class="card small">
+            <h3>Total Products</h3>
+            <p>{{ product_count }}</p>
         </div>
 
-        <!-- MAIN CARDS -->
-        <h1 class="title">Staff Dashboard</h1>
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>Total Products</h3>
-                <p>120</p>
-            </div>
-
-            <div class="card">
-                <h3>Sales Today</h3>
-                <p>₹4,580</p>
-            </div>
-
-            <div class="card">
-                <h3>Pending Orders</h3>
-                <p>8</p>
-            </div>
-
+        <div class="card small">
+            <h3>My Requests</h3>
+            <p>{{ request_count }}</p>
         </div>
 
     </div>
+
+
+    
+
+</div>
 
 </body>
 </html>
