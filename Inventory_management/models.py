@@ -7,7 +7,6 @@ class Profile(models.Model):
     ROLE_CHOICES = (
         ('manager','Manager'),
         ('staff','Staff'),
-        ('accountant','Accountant')
     )
     role = models.CharField(max_length=10,choices=ROLE_CHOICES,default='staff')
     profile_pic = models.ImageField(upload_to='profile_pics/',default='profile_pics/default.jpg')
